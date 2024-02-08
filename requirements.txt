@@ -7,3 +7,6 @@ chromadb
 pdf2image
 faiss-cpu
 langchain_google_genai
+python-dotenv
+streamlit-ace
+streamlit-mermaid

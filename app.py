@@ -46,12 +46,11 @@ def input_image_setup(uploaded_file, img_file_buffer):
         raise FileNotFoundError("No file uploaded")
 ##initialize our streamlit app
 
-st.set_page_config(page_title="Nutri-Genie App",page_icon=":apple:",initial_sidebar_state="collapsed")
+st.set_page_config(page_title="GeminiAI App 🤖",page_icon=":apple:",initial_sidebar_state="collapsed")
 
-st.header("Nutri-Genie App 🥙")
+st.header("Gemini-AI App 🤖")
 # input=st.text_input("Input Prompt: ",key="input")
 # Add GitHub icon and link
-st.markdown("[![GitHub](https://img.shields.io/badge/GitHub-Visit-brightgreen?style=for-the-badge&logo=github)](https://github.com/HimanshuMohanty-Git24/NutriGenie-Ai)")
 input = ""
 # Choose upload method
 upload_option = st.radio("Choose upload method:", ("Upload Photo", "Take a Picture"))
@@ -68,32 +67,10 @@ if upload_option == "Upload Photo":
 else:
     img_file_buffer = st.camera_input("Capture your meal")
 
-submit = st.button("Analyse my Meal🍴")
+submit = st.button("Generate Quary 🔃")
 
-input_prompt="""
-You are an expert in nutritionist where you need to see the food items from the image
-               and calculate the total calories, also provide the details of every food items with calories intake
-               is below format
-
-               FOOD ITEMS AND CALORIES:
-
-                1. Item 1 - XXX calories
-                2. Item 2 - XXX calories
-                3. Item 3 - XXX calories
-
-                TOTAL CALORIES:
-                Your total caloric intake from this meal is XXX calories.
-
-                NUTRITIONAL ANALYSIS:
-                Based on my assessment, this meal contains the following ratios of macronutrients:
-
-                - Carbohydrates: XX%
-                - Protein: XX%
-                - Fat: XX%
-
-                RECOMMENDATION:
-                [Your food is healthy/Your food is not healthy] because [detailed explanation of why it is or is not healthy].
-                I would recommend [specific suggestions to improve meal healthiness] to help optimize your nutritional intake.
+input_prompt=""" 
+    Convert ER Model into SQL Query
 """
 
 ## If submit button is clicked
