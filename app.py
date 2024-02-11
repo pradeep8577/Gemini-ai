@@ -1,20 +1,19 @@
-### Health Management APP
 from dotenv import load_dotenv
-
-load_dotenv() ## load all the environment variables
 import time
 import streamlit as st
 import os
 import google.generativeai as genai
 from PIL import Image
 
+load_dotenv() ## load all the environment variables
+
 genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
 
 ## Function to load Google Gemini Pro Vision API And get response
 
-def get_gemini_repsonse(input,image,prompt):
-    model=genai.GenerativeModel('gemini-pro-vision')
-    response=model.generate_content([input,image[0],prompt])
+def get_gemini_repsonse(input, image, prompt):
+    model = genai.GenerativeModel('gemini-pro-vision')
+    response = model.generate_content([input, image[0], prompt])
     return response.text
 
 def input_image_setup(uploaded_file, img_file_buffer):
@@ -44,16 +43,18 @@ def input_image_setup(uploaded_file, img_file_buffer):
         return image_parts
     else:
         raise FileNotFoundError("No file uploaded")
+
 ##initialize our streamlit app
 
-st.set_page_config(page_title="GeminiAI App 🤖",page_icon=":apple:",initial_sidebar_state="collapsed")
+st.set_page_config(page_title="GeminiAI App 🤖", page_icon=":apple:", initial_sidebar_state="collapsed")
 
 st.header("Gemini-AI App 🤖")
-# input=st.text_input("Input Prompt: ",key="input")
-# Add GitHub icon and link
-input = ""
-# Choose upload method
-upload_option = st.radio("Choose upload method:", ("Upload Photo", "Take a Picture"))
+
+input = ""  # Placeholder for input prompt
+
+# upload only image 
+upload_option = st.radio("Choose an option", ["Upload Photo", "Capture Photo"])
+
 
 uploaded_file = None
 img_file_buffer = None
@@ -67,17 +68,25 @@ if upload_option == "Upload Photo":
 else:
     img_file_buffer = st.camera_input("Capture your meal")
 
-submit = st.button("Generate Quary 🔃")
+submit = st.button("Generate Queries 🔃")
 
-input_prompt=""" 
+# Queries
+input_prompt1 = """ 
     Convert ER Model into SQL Query
+"""
+input_prompt2 = """ 
+    {response}, for each table what is its primary key and relation of the table with other in short summary
 """
 
 ## If submit button is clicked
 
 if submit:
-    with st.spinner('Analyzing your meal...'):
+    with st.spinner('Generating Queries...'):
         image_data = input_image_setup(uploaded_file, img_file_buffer)
-        response = get_gemini_repsonse(input_prompt, image_data, "")
-        st.subheader("Your Nutritional Analysis:")
-        st.write(response)
+        response1 = get_gemini_repsonse(input_prompt1, image_data, "")
+        st.subheader("SQL Query Generated Successfully! 🎉")
+        st.write(response1)
+        
+        response2 = get_gemini_repsonse(input_prompt2.format(response=response1), image_data, "")
+        st.subheader("Result Generated Successfully! 🎉")
+        st.write(response2)
