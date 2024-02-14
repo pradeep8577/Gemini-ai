@@ -75,7 +75,7 @@ input_prompt1 = """
     Convert ER Model into SQL Query
 """
 input_prompt2 = """ 
-    {response}, for each table what is its primary key and relation of the table with other in table
+    {response}, for each table what is its primary key and relation of the table with other in table format
 """
 
 ## If submit button is clicked
