@@ -48,7 +48,7 @@ def input_image_setup(uploaded_file, img_file_buffer):
 
 st.set_page_config(page_title="GeminiAI App 🤖", page_icon=":apple:", initial_sidebar_state="collapsed")
 
-st.header("Gemini-AI App 🤖")
+# st.header("Gemini-AI App 🤖")
 
 input = ""  # Placeholder for input prompt
 
@@ -75,7 +75,7 @@ input_prompt1 = """
     Convert ER Model into SQL Query
 """
 input_prompt2 = """ 
-    {response}, for each table what is its primary key and relation of the table with other in short summary
+    {response}, for each table what is its primary key and relation of the table with other in table
 """
 
 ## If submit button is clicked
